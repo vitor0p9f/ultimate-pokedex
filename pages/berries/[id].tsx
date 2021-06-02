@@ -1,8 +1,9 @@
-import { Center, Flex, Text } from '@chakra-ui/layout'
-import { Image, Spinner } from '@chakra-ui/react'
+import { Flex, Image, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/dist/client/router'
+import LoadingScreen from '../../components/LoadingScreen'
+import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
 interface BerryProps {
@@ -26,15 +27,15 @@ interface ArrayBerriesSchema {
 const Berry: React.FC<ComponentProps> = ({ berry }) => {
   const { isFallback } = useRouter()
 
-  if (isFallback) return <Center><Spinner size="xl" /></Center>
+  if (isFallback) return <LoadingScreen />
 
   return (
     <Flex direction="column">
       <Image src={berry.sprite} alt={berry.name} width="5rem" height="5rem" margin="0"></Image>
-      <Text>{berry.name}</Text>
-      <Text>{berry.firmness}</Text>
-      <Text>{berry.growthTime}</Text>
-      <Text>{berry.maxHarvest}</Text>
+      <Text>Name: {berry.name}</Text>
+      <Text>Firmness: {berry.firmness}</Text>
+      <Text>Growth Time: {berry.growthTime}</Text>
+      <Text>Max Harvest: {berry.maxHarvest}</Text>
     </Flex>
   )
 }
@@ -71,12 +72,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const berryID = berryData.id
   const berryGrowthTime = berryData.growth_time
   const berryMaxHarvest = berryData.max_harvest
-  const berryFirmness = berryData.firmness.name
+  const berryFirmness = Capitalize(berryData.firmness.name)
   const berryItemURL = berryData.item.url
 
   const { data: berryItemData } = await axios.get(berryItemURL)
 
-  const berryName = berryItemData.name
+  const berryName = Capitalize(berryItemData.name)
   const berrySprite = berryItemData.sprites.default
 
   const berrySchema = {
@@ -93,6 +94,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       berry
-    }
+    },
+    revalidate: 86400
   }
 }

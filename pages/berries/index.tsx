@@ -1,9 +1,8 @@
-import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/layout'
-import { Image } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/dist/client/router'
 import Navbar from '../../components/Navbar'
+import RenderItemCards from '../../components/RenderItemCards'
 import AxiosPokeAPI from '../../services/api'
 
 interface BerryProps {
@@ -27,23 +26,11 @@ interface ComponentProps {
 }
 
 const Berries: React.FC<ComponentProps> = ({ berries }) => {
-  const router = useRouter()
   return (
     <>
       <Navbar />
       <Flex justifyContent="center" alignItems="center">
-        <SimpleGrid columns={4} spacing="50px">
-          {berries.map(berry => (
-            <Box key={berry.id} cursor="pointer"
-              display="flex" flexDirection="column" alignItems="center" justifyContent="center" onClick={() => { router.push(`/berries/${berry.id}`) }} _hover={{
-                color: '#666666'
-              }}>
-
-              <Image src={berry.sprite} alt={berry.name} width="5rem" height="5rem" margin="0"></Image>
-              <Text>{berry.name}</Text>
-            </Box>
-          ))}
-        </SimpleGrid>
+        <RenderItemCards items={berries} path="berries" />
       </Flex>
     </>
   )
@@ -81,6 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       berries: berries
-    }
+    },
+    revalidate: 86400
   }
 }

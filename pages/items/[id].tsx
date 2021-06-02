@@ -1,8 +1,9 @@
-import { Center, Flex, Text } from '@chakra-ui/layout'
-import { Image, Spinner } from '@chakra-ui/react'
+import { Flex, Image, Stack, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/dist/client/router'
+import LoadingScreen from '../../components/LoadingScreen'
+import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
 interface ArrayAttributesProps {
@@ -40,16 +41,19 @@ interface ArrayItemsSchema {
 const Item: React.FC<ComponentProps> = ({ item }) => {
   const { isFallback } = useRouter()
 
-  if (isFallback) return <Center><Spinner size="xl" /></Center>
+  if (isFallback) return <LoadingScreen />
 
   return (
     <Flex direction="column">
       <Image src={item.sprite} alt={item.name} width="5rem" height="5rem" margin="0"></Image>
-      <Text>{item.name}</Text>
-      <Text>{item.category}</Text>
-      {item.effects.map(effect => (
-        <Text key="">{effect}</Text>
-      ))}
+      <Text>Name: {item.name}</Text>
+      <Text>Category: {item.category}</Text>
+      <Text>Effects:</Text>
+      <Stack direction="column" spacing={4}>
+        {item.effects.map(effect => (
+          <Text key="">{effect}</Text>
+        ))}
+      </Stack>
     </Flex>
   )
 }
@@ -85,9 +89,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { data: itemData } = await AxiosPokeAPI.get(`/item/${context.params?.id}`)
 
   const arrayOfItemsAttributes: ArrayAttributesProps[] = itemData.attributes
-  const itemCategory = itemData.category.name
+  const itemCategory = Capitalize(itemData.category.name)
   const itemID = itemData.id
-  const itemName = itemData.name
+  const itemName = Capitalize(itemData.name)
   const itemSprite = itemData.sprites.default
   const arrayOfItemEffects: ArrayEffectsProps[] = itemData.effect_entries
   const itemEffects: string[] = []
@@ -113,6 +117,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       item
-    }
+    },
+    revalidate: 86400
   }
 }

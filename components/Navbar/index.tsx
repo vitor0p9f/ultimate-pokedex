@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
       <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/berries', undefined, { shallow: true }) }}>Berries</Box>
       <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/items', undefined, { shallow: true }) }}>Items</Box>
       <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/regions', undefined, { shallow: true }) }}>Regions</Box>
+      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/natures', undefined, { shallow: true }) }}>Natures</Box>
     </Flex>
   )
 }
