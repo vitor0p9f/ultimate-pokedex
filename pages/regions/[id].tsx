@@ -1,10 +1,9 @@
-import { Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import LoadingScreen from '../../components/LoadingScreen'
 import Navbar from '../../components/Navbar'
-import RenderItemCards from '../../components/RenderItemCards'
+import RenderPokemonsCards from '../../components/RenderPokemonsCards'
 import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
@@ -38,10 +37,19 @@ interface PokemonEntries {
   }
 }
 
+interface PokemonTypes {
+  slot: number
+  type: {
+    name: string
+    url: string
+  }
+}
+
 interface PokemonProps {
   id: number
   name: string
   sprite: string
+  types: string[]
 }
 
 interface RegionProps {
@@ -69,8 +77,7 @@ const Region: React.FC<ComponentProps> = ({ region }) => {
           <ListItem key={location.id}>{location.name}</ListItem>
         ))}
       </UnorderedList> */}
-      <Text>Pokémons</Text>
-      <RenderItemCards items={region.pokemons} path="pokemons" />
+      <RenderPokemonsCards pokemons={region.pokemons} path="pokemon" />
     </>
   )
 }
@@ -139,11 +146,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const pokemonName = Capitalize(pokemonData.name)
     const pokemonSprite = pokemonData.sprites.front_default
+    const pokemonTypesArray: PokemonTypes[] = pokemonData.types
+    const pokemonTypes = []
+
+    for (const type of pokemonTypesArray) {
+      pokemonTypes.push(Capitalize(type.type.name))
+    }
 
     const pokemonSchema = {
       id: pokemonID,
       name: pokemonName,
-      sprite: pokemonSprite
+      sprite: pokemonSprite,
+      types: pokemonTypes
     }
 
     regionPokemons.push(pokemonSchema)
