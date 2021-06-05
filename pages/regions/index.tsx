@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
-import Navbar from '../../components/Navbar'
-import RenderTextCards from '../../components/RenderTextCards'
+import Navbar from '@/components/Navbar'
+import RenderTextCards from '@/components/RenderTextCards'
 import AxiosPokeAPI from '../../services/api'
 
 interface RegionProps {

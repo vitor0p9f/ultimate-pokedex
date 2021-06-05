@@ -4,6 +4,11 @@
     "es2021": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "alias": true
+    }
+  },
   "extends": [
     "standard",
     "eslint:recommended",
@@ -21,8 +26,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "ecmaVersion": 12
   },
   "plugins": [
     "react",
@@ -41,6 +45,7 @@
         "allowExpressions": true,
         "allowConciseArrowFunctionExpressionsStartingWithVoid": true
       }
-    ]
+    ],
+    "import/no-unresolved": "off"
   }
 }

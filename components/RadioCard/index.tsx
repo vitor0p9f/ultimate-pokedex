@@ -13,8 +13,7 @@ const RadioCard: React.FC<ComponentProps> = ({ radioProps, children, bgColor, va
   const checkbox = getCheckboxProps()
 
   return (
-    <Box as="label" width="4em"
-      height="4em">
+    <Box as="label" width="4.5em" height="4.5em">
       <Input {...input} value={value} />
       <Flex
         {...checkbox}

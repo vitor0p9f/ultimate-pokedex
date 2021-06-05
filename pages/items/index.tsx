@@ -1,22 +1,13 @@
-import { Flex } from '@chakra-ui/react'
+import { SimpleGrid } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
-import Navbar from '../../components/Navbar'
-import RenderItemCards from '../../components/RenderItemCards'
+import ItemsModal from '@/components/CustomModals/ItemsModal'
+import Navbar from '@/components/Navbar'
+import Capitalize from '../../globalFunctions/Capitalize'
+import { ArrayAttributesProps, ArrayEffectsProps, ItemProps, ItemSchema } from '@/interfaces/pages/items'
 import AxiosPokeAPI from '../../services/api'
 
-interface ItemSchema {
-  name: string
-  url: string
-}
-
-interface ItemProps {
-  name: string
-  id: number
-  sprite: string
-}
-
-interface ComponentProps {
+export interface ComponentProps {
   items: ItemProps[]
 }
 
@@ -24,9 +15,11 @@ const Items: React.FC<ComponentProps> = ({ items }) => {
   return (
     <>
       <Navbar />
-      <Flex justifyContent="center" alignItems="center">
-        <RenderItemCards items={items} path="items" />
-      </Flex>
+      <SimpleGrid columns={6} spacing="50px" marginRight="5%" marginLeft="5%">
+        {items.map(item => (
+          <ItemsModal data={item} key={item.id} />
+        ))}
+      </SimpleGrid>
     </>
   )
 }
@@ -34,22 +27,38 @@ const Items: React.FC<ComponentProps> = ({ items }) => {
 export default Items
 
 export const getStaticProps: GetStaticProps = async () => {
-  const items: Array<ItemProps> = []
+  const items: ItemProps[] = []
   const { data: itemsData } = await AxiosPokeAPI.get('/item/?limit=1000')
 
   const itemsArray: ItemSchema[] = itemsData.results
 
   for (const item of itemsArray) {
-    const { data: itemData } = await axios.get(item.url)
+    const { data: itemData } = await axios(item.url)
 
+    const arrayOfItemsAttributes: ArrayAttributesProps[] = itemData.attributes
+    const itemCategory = Capitalize(itemData.category.name)
     const itemID = itemData.id
+    const itemName = Capitalize(itemData.name)
     const itemSprite = itemData.sprites.default
-    const itemName = itemData.name
+    const arrayOfItemEffects: ArrayEffectsProps[] = itemData.effect_entries
+    const itemEffects: string[] = []
+    const itemAttributes: string[] = []
+
+    for (const attribute of arrayOfItemsAttributes) {
+      itemAttributes.push(attribute.name)
+    }
+
+    for (const effect of arrayOfItemEffects) {
+      itemEffects.push(effect.effect)
+    }
 
     items.push({
-      name: itemName,
       id: itemID,
-      sprite: itemSprite
+      name: itemName,
+      sprite: itemSprite,
+      effects: itemEffects,
+      category: itemCategory,
+      attributes: itemAttributes
     })
   }
 
