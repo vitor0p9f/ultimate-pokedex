@@ -8,8 +8,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/interfaces/*": ["interfaces/*"]
+      "@/components/*": ["src/components/*"],
+      "@/types/*": ["src/types/*"],
+      "@/globalFunctions/*": ["src/globalFunctions/*"],
+      "@/services/*": ["src/services/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
