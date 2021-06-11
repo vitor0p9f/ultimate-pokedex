@@ -1,9 +1,9 @@
+import NatureModal from '@/components/CustomModals/NatureModal'
 import { NatureProps } from '@/types/globalTypes'
 import { NatureSchema, NatureStatusChange, NatureStatusSchema } from '@/types/pages/natures'
 import { SimpleGrid } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
-import NaturesModal from 'src/components/CustomModals/NaturesModal'
 import Navbar from 'src/components/Navbar'
 import Capitalize from 'src/globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
@@ -16,9 +16,9 @@ const Natures: React.FC<ComponentProps> = ({ natures }) => {
   return (
     <>
       <Navbar />
-      <SimpleGrid columns={6} spacing="50px" marginRight="5%" marginLeft="5%">
+      <SimpleGrid columns={[2, 4, 6]} spacing="20px" paddingRight="5%" paddingLeft="5%" width="100%">
         {natures.map(nature => (
-          <NaturesModal key={nature.id} data={nature} />
+          <NatureModal key={nature.id} data={nature} />
         ))}
       </SimpleGrid>
     </>

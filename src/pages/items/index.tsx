@@ -1,10 +1,10 @@
+import ItemModal from '@/components/CustomModals/ItemModal'
 import { ItemProps } from '@/types/globalTypes'
 import { ArrayAttributesProps, ArrayEffectsProps, ItemSchema } from '@/types/pages/items'
 import { Flex, SimpleGrid } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
 import { useRef, useState } from 'react'
-import ItemsModal from 'src/components/CustomModals/ItemsModal'
 import CustomSearchBar from 'src/components/CustomSearchBar'
 import Navbar from 'src/components/Navbar'
 import Capitalize from '../../globalFunctions/Capitalize'
@@ -33,9 +33,9 @@ const Items: React.FC<ComponentProps> = ({ items }) => {
       <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
         <CustomSearchBar ref={searchBarRef} onChange={filterItems} />
 
-        <SimpleGrid columns={6} spacing="50px" width="100%">
+        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%">
           {currentItems.map(item => (
-            <ItemsModal data={item} key={item.id} />
+            <ItemModal data={item} key={item.id} />
           ))}
         </SimpleGrid>
       </Flex>

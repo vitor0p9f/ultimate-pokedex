@@ -1,4 +1,4 @@
-import BerriesModal from '@/components/CustomModals/BerriesModal'
+import BerryModal from '@/components/CustomModals/BerryModal'
 import CustomSearchBar from '@/components/CustomSearchBar'
 import Navbar from '@/components/Navbar'
 import Capitalize from '@/globalFunctions/Capitalize'
@@ -33,9 +33,9 @@ const Berries: React.FC<ComponentProps> = ({ berries }) => {
       <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
         <CustomSearchBar ref={searchBarRef} onChange={filterBerries} />
 
-        <SimpleGrid columns={6} spacing="50px" width="100%">
+        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%">
           {currentBerries.map(berry => (
-            <BerriesModal data={berry} key={berry.id} />
+            <BerryModal data={berry} key={berry.id} />
           ))}
         </SimpleGrid>
       </Flex>
@@ -63,10 +63,12 @@ export const getStaticProps: GetStaticProps = async () => {
     const berryFlavors: BerryFlavorProps[] = []
 
     for (const flavor of berryFlavorsArray) {
-      berryFlavors.push({
-        name: Capitalize(flavor.flavor.name),
-        potency: flavor.potency
-      })
+      if (flavor.potency !== 0) {
+        berryFlavors.push({
+          name: Capitalize(flavor.flavor.name),
+          potency: flavor.potency
+        })
+      }
     }
 
     const berryItemURL = berryData.item.url

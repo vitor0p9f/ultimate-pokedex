@@ -15,7 +15,7 @@ const Regions: React.FC<ComponentProps> = ({ regions }) => {
     <>
       <Navbar />
 
-      <Flex justifyContent="center" alignItems="center">
+      <Flex justifyContent="center" width="100%" paddingLeft="5%" paddingRight="5%">
         <RenderTextCards items={regions} path="regions" />
       </Flex>
     </>

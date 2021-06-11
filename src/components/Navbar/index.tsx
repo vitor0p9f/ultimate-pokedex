@@ -6,11 +6,11 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex width="100%" justifyContent="space-between">
-      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/', undefined, { shallow: true }) }}>Home</Box>
-      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/berries', undefined, { shallow: true }) }}>Berries</Box>
-      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/items', undefined, { shallow: true }) }}>Items</Box>
-      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/regions', undefined, { shallow: true }) }}>Regions</Box>
-      <Box padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/natures', undefined, { shallow: true }) }}>Natures</Box>
+      <Box fontSize={['sm', 'md', 'lg']} padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/', undefined, { shallow: true }) }}>Home</Box>
+      <Box fontSize={['sm', 'md', 'lg']} padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/berries', undefined, { shallow: true }) }}>Berries</Box>
+      <Box fontSize={['sm', 'md', 'lg']} padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/items', undefined, { shallow: true }) }}>Items</Box>
+      <Box fontSize={['sm', 'md', 'lg']} padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/regions', undefined, { shallow: true }) }}>Regions</Box>
+      <Box fontSize={['sm', 'md', 'lg']} padding=" 0 1em" cursor="pointer" onClick={() => { router.push('/natures', undefined, { shallow: true }) }}>Natures</Box>
     </Flex>
   )
 }

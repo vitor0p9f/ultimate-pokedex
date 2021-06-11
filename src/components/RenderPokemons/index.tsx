@@ -1,9 +1,9 @@
-import { Button, Center, Flex, SimpleGrid, useRadioGroup } from '@chakra-ui/react'
+import PokemonModal from '@/components/CustomModals/PokemonModal'
+import RadioCard from '@/components/RadioCard'
+import { Box, Button, Center, Flex, SimpleGrid, useRadioGroup } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 import getTypesColor from 'src/globalFunctions/GetColorByType'
-import PokemonsModal from '../CustomModals/PokemonsModal'
-import RadioCard from '../RadioCard'
 
 const types = ['Normal', 'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Grass', 'Water', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy']
 
@@ -27,7 +27,7 @@ interface ComponentProps {
   pokemons: PokemonProps[]
 }
 
-const RenderPokemonsCards: React.FC<ComponentProps> = ({ pokemons }) => {
+const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
   const [currentPokemons, setCurrentPokemons] = useState(pokemons)
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'Type'
@@ -56,28 +56,30 @@ const RenderPokemonsCards: React.FC<ComponentProps> = ({ pokemons }) => {
   return (
     <>
       <Flex paddingLeft="5%" paddingRight="5%" alignContent="center" flexDir="column" width="100%">
-        <SimpleGrid columns={9} {...radioGroup} spacing="20px" marginBottom="30px" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        <Box {...radioGroup} width="100%" marginBottom="30px" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           filterPokemons(event.target.value)
-        }} width="100%">
-          {types.map((type) => {
-            const radio = getRadioProps({
-              name: type
-            })
-            return (
-              <RadioCard key={type} radioProps={radio} bgColor={getTypesColor(type)} value={type} >
-                <Image src={`/img/types/${type}.svg`} alt={type} width="45%" height="45%" />
-              </RadioCard>
-            )
-          })}
-        </SimpleGrid>
+        }}>
+          <SimpleGrid columns={[3, 6, 9]} spacing="20px" width="100%">
+            {types.map((type) => {
+              const radio = getRadioProps({
+                name: type
+              })
+              return (
+                <RadioCard key={type} radioProps={radio} bgColor={getTypesColor(type)} value={type} tooltipText={type}>
+                  <Image src={`/img/types/${type}.svg`} alt={type} width="45%" height="45%" />
+                </RadioCard>
+              )
+            })}
+          </SimpleGrid>
+        </Box>
 
         <Center marginBottom="30px">
-          <Button onClick={() => setCurrentPokemons(pokemons)}>Clear Filter</Button>
+          <Button onClick={() => filterPokemons('')}>Clear Filter</Button>
         </Center>
 
-        <SimpleGrid columns={6} spacing="20px" width="100%">
+        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%">
           {currentPokemons.map(pokemon => (
-            <PokemonsModal key={pokemon.id} data={pokemon} />
+            <PokemonModal key={pokemon.id} data={pokemon} />
           ))}
         </SimpleGrid>
       </Flex>
@@ -85,4 +87,4 @@ const RenderPokemonsCards: React.FC<ComponentProps> = ({ pokemons }) => {
   )
 }
 
-export default RenderPokemonsCards
+export default RenderPokemons

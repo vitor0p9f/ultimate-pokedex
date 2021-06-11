@@ -1,10 +1,10 @@
+import RenderPokemons from '@/components/RenderPokemons'
 import { AbilityProps, LocationProps, PokemonEntries, PokemonProps, PokemonTypes, RegionPokedex, RegionProps, StatsProps, StatsSchema } from '@/types/pages/regions/ID'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import LoadingScreen from 'src/components/LoadingScreen'
 import Navbar from 'src/components/Navbar'
-import RenderPokemonsCards from 'src/components/RenderPokemonsCards'
 import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
@@ -20,8 +20,7 @@ const Region: React.FC<ComponentProps> = ({ region }) => {
   return (
     <>
       <Navbar />
-
-      <RenderPokemonsCards pokemons={region.pokemons} />
+      <RenderPokemons pokemons={region.pokemons} />
     </>
   )
 }

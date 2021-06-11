@@ -16,7 +16,7 @@ const RenderTextCards: React.FC<ComponentProps> = ({ items, path }) => {
   const router = useRouter()
 
   return (
-    <SimpleGrid columns={4} spacing="50px">
+    <SimpleGrid columns={[2, 4]} spacing="20px">
       {items.map(item => (
         <Box key={item.id} cursor="pointer"
           display="flex" flexDirection="column" alignItems="center" justifyContent="center" onClick={() => { router.push(`/${path}/${item.id}`) }} _hover={{
