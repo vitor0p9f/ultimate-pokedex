@@ -1,7 +1,37 @@
-import { Box, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import ImageCard from '@/components/ImageCard'
+import { Box, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Stack, Text, useDisclosure } from '@chakra-ui/react'
+
+type PokemonView = {
+  name: string
+  id: number
+  sprite: string
+  types: string[]
+}
+
+type MetaProps = {
+  ailment: string
+  ailmentChance: number
+  critRate: number
+  flinchChance: number
+}
+
+type MoveProps = {
+  name: string
+  id: number
+  accuracy: number
+  effects: string[]
+  type: string
+  target: string
+  priority: number
+  pp: number
+  power: number
+  meta: MetaProps
+  damageClass: string
+  learnedBy: PokemonView[]
+}
 
 type ComponentProps = {
-  data: any
+  data: MoveProps
 }
 
 const MoveModal: React.FC<ComponentProps> = ({ data }) => {
@@ -15,7 +45,7 @@ const MoveModal: React.FC<ComponentProps> = ({ data }) => {
         <Heading size="md">{data.name}</Heading>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="outside">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
         <ModalOverlay />
 
         <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">
@@ -24,11 +54,17 @@ const MoveModal: React.FC<ComponentProps> = ({ data }) => {
           <ModalCloseButton />
 
           <ModalBody display="flex" flexDir="column">
-            <Stack>
+            <Stack marginBottom="20px">
               <Text>Name: {data.name}</Text>
-              <Text>Name: {data.likesFlavor}</Text>
-              <Text>Name: {data.hatesFlavor}</Text>
+              <Text>Accuracy: {data.accuracy}</Text>
+              <Text>Damage Class: {data.damageClass}</Text>
             </Stack>
+
+            <SimpleGrid columns={2} spacing="20px" paddingRight="5%" paddingLeft="5%" width="100%">
+              {data.learnedBy.map(pokemon => (
+                <ImageCard key="" data={pokemon} animation={false} />
+              ))}
+            </SimpleGrid>
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -6,9 +6,8 @@ const CustomSearchBar = forwardRef<InputProps, 'input'>((props, ref) => (
     <InputLeftAddon>
       <Search2Icon color="gray.300" />
     </InputLeftAddon>
-    <Input {...props} ref={ref} />
+    <Input {...props} ref={ref} bgColor="#fefefe" />
   </InputGroup>
-
 ))
 
 export default CustomSearchBar

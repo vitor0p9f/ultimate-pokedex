@@ -1,4 +1,4 @@
-import { Box, Flex, Input, Tooltip, useRadio, UseRadioProps } from '@chakra-ui/react'
+import { Flex, Input, Tooltip, useRadio, UseRadioProps } from '@chakra-ui/react'
 
 interface ComponentProps {
   radioProps: UseRadioProps
@@ -15,26 +15,25 @@ const RadioCard: React.FC<ComponentProps> = ({ radioProps, children, bgColor, va
 
   return (
     <Tooltip hasArrow label={tooltipText}>
-      <Box as="label" width="100%" height="100%">
+      <Flex
+        as="label"
+        {...checkbox}
+        width="4.5em"
+        height="4.5em"
+        justifyContent="center"
+        alignItems="center"
+        borderRadius="50%"
+        cursor="pointer"
+        bgColor={bgColor}
+        _focus={{
+          borderWidth: '5px',
+          borderColor: 'yellow'
+        }}
+        margin="0"
+      >
         <Input {...input} value={value} />
-        <Flex
-          {...checkbox}
-          width="100%"
-          height="100%"
-          justifyContent="center"
-          alignItems="center"
-          borderRadius="50%"
-          cursor="pointer"
-          bgColor={bgColor}
-          _focus={{
-            borderWidth: '0.3em',
-            borderColor: 'yellow'
-          }}
-          margin="0"
-        >
-          {children}
-        </Flex>
-      </Box>
+        {children}
+      </Flex>
     </Tooltip>
   )
 }

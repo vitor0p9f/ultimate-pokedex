@@ -1,11 +1,12 @@
 import NatureModal from '@/components/CustomModals/NatureModal'
+import Navbar from '@/components/Navbar'
 import { NatureProps } from '@/types/globalTypes'
 import { NatureSchema, NatureStatusChange, NatureStatusSchema } from '@/types/pages/natures'
 import { SimpleGrid } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
-import Navbar from 'src/components/Navbar'
-import Capitalize from 'src/globalFunctions/Capitalize'
+import Head from 'next/head'
+import Capitalize from '@/globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
 interface ComponentProps {
@@ -15,7 +16,12 @@ interface ComponentProps {
 const Natures: React.FC<ComponentProps> = ({ natures }) => {
   return (
     <>
+      <Head>
+        <title>Natures</title>
+      </Head>
+
       <Navbar />
+
       <SimpleGrid columns={[2, 4, 6]} spacing="20px" paddingRight="5%" paddingLeft="5%" width="100%">
         {natures.map(nature => (
           <NatureModal key={nature.id} data={nature} />
@@ -30,7 +36,7 @@ export default Natures
 export const getStaticProps: GetStaticProps = async () => {
   const natures: NatureProps[] = []
 
-  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=30')
+  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=1') // limit 30
 
   const naturesArray: NatureSchema[] = naturesData.results
 

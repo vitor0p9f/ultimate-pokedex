@@ -16,7 +16,7 @@ const NatureModal: React.FC<ComponentProps> = ({ data }) => {
         <Heading size="md">{data.name}</Heading>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="outside">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
         <ModalOverlay />
 
         <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">

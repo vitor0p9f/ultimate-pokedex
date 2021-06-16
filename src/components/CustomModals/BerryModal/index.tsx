@@ -1,7 +1,6 @@
+import ImageCard from '@/components/ImageCard'
 import { BerryProps } from '@/types/globalTypes'
-import {
-  Box, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr, useDisclosure
-} from '@chakra-ui/react'
+import { Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Stack, Table, TableCaption, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
 
 interface ComponentProps {
   data: BerryProps
@@ -12,14 +11,9 @@ const BerryModal: React.FC<ComponentProps> = ({ data }) => {
 
   return (
     <>
-      <Box key={data.id} cursor="pointer" display="flex" fontSize={['sm', 'md', 'lg']} flexDirection="column" alignItems="center" justifyContent="center" onClick={onOpen} _hover={{
-        backgroundColor: '#666666'
-      }}>
-        <Image src={data.sprite} alt={data.name} width="100%" height="100%" />
-        <Text>{data.name}</Text>
-      </Box>
+      <ImageCard data={data} onOpen={onOpen} animation={true} />
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="outside">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
         <ModalOverlay />
 
         <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">
@@ -28,28 +22,28 @@ const BerryModal: React.FC<ComponentProps> = ({ data }) => {
           <ModalCloseButton />
 
           <ModalBody display="flex" flexDir="column" justifyContent="center">
-            <SimpleGrid columns={[1, 2]} spacing="10%" width="100%">
-              <Image src={data.sprite} alt={data.name} margin="0" width="50%" height="50%" alignSelf="center" />
+            <SimpleGrid columns={2} spacing="10%" width="100%" alignItems="center" display="flex">
+              <Image src={data.sprite} alt={data.name} margin="0" width="100%" height="100%" alignSelf="center" />
 
-              <Stack display="flex" justifyContent="center" alignItems="center">
-                <Flex flexDir="row" alignItems="center" justifyContent="space-between">
+              <Stack display="flex" justifyContent="center" alignItems="center" width={['60%', '100%']} alignSelf="center">
+                <Flex flexDir="row" alignItems="center" justifyContent="space-between" width="100%">
                   <Text>Firmness:</Text>
                   <Text>{data.firmness}</Text>
                 </Flex>
 
-                <Flex flexDir="row" alignItems="center" justifyContent="space-between">
+                <Flex flexDir="row" alignItems="center" justifyContent="space-between" width="100%">
                   <Text>Growth Time:</Text>
                   <Text>{data.growthTime}</Text>
                 </Flex>
 
-                <Flex flexDir="row" alignItems="center" justifyContent="space-between">
+                <Flex flexDir="row" alignItems="center" justifyContent="space-between" width="100%">
                   <Text>Max Harvest:</Text>
                   <Text>{data.maxHarvest}</Text>
                 </Flex>
               </Stack>
             </SimpleGrid>
 
-            <Table variant="simple">
+            <Table variant="simple" marginTop="5%">
               <TableCaption placement="top">Flavors</TableCaption>
 
               <Thead>

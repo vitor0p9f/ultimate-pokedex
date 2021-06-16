@@ -1,5 +1,6 @@
+import ImageCard from '@/components/ImageCard'
 import { ItemProps } from '@/types/globalTypes'
-import { Box, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react'
 
 interface ComponentProps {
   data: ItemProps
@@ -10,14 +11,9 @@ const ItemModal: React.FC<ComponentProps> = ({ data }) => {
 
   return (
     <>
-      <Box key={data.id} cursor="pointer" fontSize={['sm', 'md', 'lg']} display="flex" flexDirection="column" alignItems="center" justifyContent="center" onClick={onOpen} _hover={{
-        backgroundColor: '#666666'
-      }}>
-        <Image src={data.sprite} alt={data.name} width="100%" height="100%" />
-        <Text>{data.name}</Text>
-      </Box>
+      <ImageCard data={data} onOpen={onOpen} animation={true}/>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="outside">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
         <ModalOverlay />
 
         <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">

@@ -10,7 +10,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
   width: auto;
-  height: 100vh;  
+  height: 100vh;
 }
 
 a {
@@ -32,4 +32,22 @@ a {
   background: #999;
   border-radius: 4px;
   width: 6px;
+}
+
+/* Custom fonts */
+
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("/fonts/PokemonSolidNormal-xyWR.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pokemon Hollow";
+  src: url("/fonts/PokemonHollowNormal-pyPZ.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }

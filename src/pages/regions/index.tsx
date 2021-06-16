@@ -2,6 +2,7 @@ import { RegionProps, RegionSchema } from '@/types/pages/regions'
 import { Flex } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import Navbar from 'src/components/Navbar'
 import RenderTextCards from 'src/components/RenderTextCards'
 import AxiosPokeAPI from '../../services/api'
@@ -13,6 +14,10 @@ interface ComponentProps {
 const Regions: React.FC<ComponentProps> = ({ regions }) => {
   return (
     <>
+      <Head>
+        <title>Regions</title>
+      </Head>
+
       <Navbar />
 
       <Flex justifyContent="center" width="100%" paddingLeft="5%" paddingRight="5%">

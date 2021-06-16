@@ -2,6 +2,7 @@ import RenderPokemons from '@/components/RenderPokemons'
 import { AbilityProps, LocationProps, PokemonEntries, PokemonProps, PokemonTypes, RegionPokedex, RegionProps, StatsProps, StatsSchema } from '@/types/pages/regions/ID'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import LoadingScreen from 'src/components/LoadingScreen'
 import Navbar from 'src/components/Navbar'
@@ -19,7 +20,12 @@ const Region: React.FC<ComponentProps> = ({ region }) => {
 
   return (
     <>
+      <Head>
+        <title>{region.name}</title>
+      </Head>
+
       <Navbar />
+
       <RenderPokemons pokemons={region.pokemons} />
     </>
   )

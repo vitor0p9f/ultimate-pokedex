@@ -1,27 +1,12 @@
 import PokemonModal from '@/components/CustomModals/PokemonModal'
 import RadioCard from '@/components/RadioCard'
+import { PokemonProps } from '@/types/globalTypes'
 import { Box, Button, Center, Flex, SimpleGrid, useRadioGroup } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 import getTypesColor from 'src/globalFunctions/GetColorByType'
 
 const types = ['Normal', 'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Grass', 'Water', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy']
-
-interface AbilityProps {
-  name: string
-  description: string
-}
-
-interface PokemonProps {
-  id: number
-  name: string
-  sprite: string
-  types: string[]
-  weight: number
-  abilities: AbilityProps[]
-  baseExperience: number,
-  encountersAreas: string[]
-}
 
 interface ComponentProps {
   pokemons: PokemonProps[]
@@ -65,9 +50,11 @@ const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
                 name: type
               })
               return (
-                <RadioCard key={type} radioProps={radio} bgColor={getTypesColor(type)} value={type} tooltipText={type}>
-                  <Image src={`/img/types/${type}.svg`} alt={type} width="45%" height="45%" />
-                </RadioCard>
+                <Center key={type}>
+                  <RadioCard radioProps={radio} bgColor={getTypesColor(type)} value={type} tooltipText={type}>
+                    <Image src={`/img/types/${type}.svg`} alt={type} width="45%" height="45%" />
+                  </RadioCard>
+                </Center>
               )
             })}
           </SimpleGrid>

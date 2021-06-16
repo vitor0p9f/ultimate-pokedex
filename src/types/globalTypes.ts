@@ -1,4 +1,5 @@
-import BerryFlavorProps from './components/CustomModals/BerriesModal'
+import { BerryFlavorProps } from './components/CustomModals/BerryModal'
+import { AbilityProps } from './components/CustomModals/PokemonModal'
 import { NatureStatusSchema } from './pages/natures'
 
 export type BerryProps = {
@@ -28,4 +29,15 @@ export type NatureProps = {
   likesFlavor: string,
   hatesFlavor: string
   statusChange: NatureStatusSchema[]
+}
+
+export type PokemonProps = {
+  id: number
+  name: string
+  sprite: string
+  types: string[]
+  weight: number
+  abilities: AbilityProps[]
+  baseExperience: number,
+  encountersAreas: string[]
 }
