@@ -37,7 +37,7 @@ const Berries: React.FC<ComponentProps> = ({ berries }) => {
 
       <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
         <Box marginBottom="50px">
-          <Heading size="sm" fontFamily="Pokemon Solid">Berries</Heading>
+          <Heading size="lg" fontFamily="Pokemon Solid">Berries</Heading>
         </Box>
 
         <CustomSearchBar ref={searchBarRef} onChange={filterBerries} />
@@ -57,7 +57,7 @@ export default Berries
 export const getStaticProps: GetStaticProps = async () => {
   const berries: BerryProps[] = []
 
-  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=10') // limit 70
+  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=20') // limit 70
 
   const arrayOfBerries: BerriesProps[] = berriesData.results
 

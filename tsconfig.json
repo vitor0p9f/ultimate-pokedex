@@ -11,7 +11,8 @@
       "@/components/*": ["src/components/*"],
       "@/types/*": ["src/types/*"],
       "@/globalFunctions/*": ["src/globalFunctions/*"],
-      "@/services/*": ["src/services/*"]
+      "@/services/*": ["src/services/*"],
+      "@/public/*": ["public/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,

@@ -21,7 +21,7 @@ const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
   const radioGroup = getRootProps()
 
   function filterPokemons(selectedType: string): void {
-    const requirement = (pokemon: PokemonProps): any => {
+    const requirement = (pokemon: PokemonProps): (PokemonProps | undefined) => {
       if (selectedType) {
         for (const type of pokemon.types) {
           if (selectedType === type) {

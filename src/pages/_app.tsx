@@ -6,7 +6,9 @@ const themeConfig = extendTheme({
   styles: {
     global: {
       'html, body': {
-        backgroundColor: '#e5e5e5'
+        backgroundColor: '#FAFAFA',
+        color: '#22252A',
+        fontFamily: 'Josefin Sans'
       }
     }
   }

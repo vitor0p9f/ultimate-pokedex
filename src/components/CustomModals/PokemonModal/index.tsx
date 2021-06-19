@@ -1,6 +1,7 @@
 import ImageCard from '@/components/ImageCard'
 import { PokemonProps } from '@/types/globalTypes'
-import { Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from '@chakra-ui/react'
+import { Image, Stack, useDisclosure } from '@chakra-ui/react'
+import ModalSchema from '../ModalSchema'
 type ComponentProps = {
   data: PokemonProps
 }
@@ -10,23 +11,13 @@ const PokemonModal: React.FC<ComponentProps> = ({ data }) => {
 
   return (
     <>
-      <ImageCard data={data} onOpen={onOpen} animation={true}/>
+      <ImageCard data={data} onOpen={onOpen} animation={true} />
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
-        <ModalOverlay />
-
-        <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">
-          <ModalHeader textAlign="center">{data.name}</ModalHeader>
-
-          <ModalCloseButton />
-
-          <ModalBody display="flex" flexDir="column">
-            <Image src={data.sprite} alt={data.name} width="80%" height="80%" margin="0"></Image>
-            <Stack>
-            </Stack>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <ModalSchema isOpen={isOpen} onClose={onClose} headerText={data.name}>
+        <Image src={data.sprite} alt={data.name} width="80%" height="80%" margin="0"></Image>
+        <Stack>
+        </Stack>
+      </ModalSchema>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { NatureProps } from '@/types/globalTypes'
-import { Box, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Heading, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import ModalSchema from '../ModalSchema'
 
 type ComponentProps = {
   data: NatureProps
@@ -16,23 +17,13 @@ const NatureModal: React.FC<ComponentProps> = ({ data }) => {
         <Heading size="md">{data.name}</Heading>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
-        <ModalOverlay />
-
-        <ModalContent fontSize={['sm', 'md', 'lg']} marginLeft="5%" marginRight="5%">
-          <ModalHeader textAlign="center">{data.name}</ModalHeader>
-
-          <ModalCloseButton />
-
-          <ModalBody display="flex" flexDir="column">
-            <Stack>
-              <Text>Name: {data.name}</Text>
-              <Text>Likes Flavor: {data.likesFlavor}</Text>
-              <Text>Hates Flavor: {data.hatesFlavor}</Text>
-            </Stack>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <ModalSchema isOpen={isOpen} onClose={onClose} headerText={data.name}>
+        <Stack>
+          <Text>Name: {data.name}</Text>
+          <Text>Likes Flavor: {data.likesFlavor}</Text>
+          <Text>Hates Flavor: {data.hatesFlavor}</Text>
+        </Stack>
+      </ModalSchema>
     </>
   )
 }
