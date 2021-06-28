@@ -5,7 +5,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import LoadingScreen from 'src/components/LoadingScreen'
-import Navbar from 'src/components/Navbar'
 import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
@@ -23,8 +22,6 @@ const Region: React.FC<ComponentProps> = ({ region }) => {
       <Head>
         <title>{region.name}</title>
       </Head>
-
-      <Navbar />
 
       <RenderPokemons pokemons={region.pokemons} />
     </>
@@ -88,7 +85,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const pokemonsEntriesArray: PokemonEntries[] = regionPokedexData.pokemon_entries
 
-  // Get region Pokemons Data
+  // Get region Pokémons Data
   for (const pokemonEntries of pokemonsEntriesArray) {
     const { data: pokemonSpecieData } = await AxiosPokeAPI.get(`/pokemon-species/${pokemonEntries.pokemon_species.name}`)
 

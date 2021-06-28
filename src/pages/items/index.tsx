@@ -1,13 +1,12 @@
 import ItemModal from '@/components/CustomModals/ItemModal'
 import { ItemProps } from '@/types/globalTypes'
 import { ArrayAttributesProps, ArrayEffectsProps, ItemSchema } from '@/types/pages/items'
-import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRef, useState } from 'react'
 import CustomSearchBar from 'src/components/CustomSearchBar'
-import Navbar from 'src/components/Navbar'
 import Capitalize from '../../globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
@@ -33,18 +32,16 @@ const Items: React.FC<ComponentProps> = ({ items }) => {
         <title>Items</title>
       </Head>
 
-      <Navbar />
-
       <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
-        <Box marginBottom="50px">
-          <Heading size="sm" fontFamily="Pokemon Solid">
+        <Box marginBottom="2%">
+          <Text fontSize={['lg', '2xl', '4xl']} fontFamily="Josefin Sans" height="100%">
             Items
-          </Heading>
+          </Text>
         </Box>
 
-        <CustomSearchBar ref={searchBarRef} onChange={filterItems} />
+        <CustomSearchBar ref={searchBarRef} onChange={filterItems}/>
 
-        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%" marginTop="50px">
+        <SimpleGrid columns={[2, 4, 6]} spacing="30px" width="100%">
           {currentItems.map(item => (
             <ItemModal data={item} key={item.id} />
           ))}
@@ -58,7 +55,7 @@ export default Items
 
 export const getStaticProps: GetStaticProps = async () => {
   const items: ItemProps[] = []
-  const { data: itemsData } = await AxiosPokeAPI.get('/item/?limit=10') // limit 1000
+  const { data: itemsData } = await AxiosPokeAPI.get('/item/?limit=5') // limit 1000
 
   const itemsArray: ItemSchema[] = itemsData.results
 
@@ -75,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const itemAttributes: string[] = []
 
     for (const attribute of arrayOfItemsAttributes) {
-      itemAttributes.push(attribute.name)
+      itemAttributes.push(Capitalize(attribute.name))
     }
 
     for (const effect of arrayOfItemEffects) {

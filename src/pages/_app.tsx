@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar'
 import { ChakraProvider, CSSReset, extendTheme } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
@@ -18,6 +19,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <ChakraProvider theme={themeConfig}>
       <CSSReset />
+      <Navbar />
       <Component {...pageProps} />
     </ChakraProvider>
   )

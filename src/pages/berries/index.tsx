@@ -1,11 +1,10 @@
 import BerryModal from '@/components/CustomModals/BerryModal'
 import CustomSearchBar from '@/components/CustomSearchBar'
-import Navbar from '@/components/Navbar'
 import Capitalize from '@/globalFunctions/Capitalize'
 import AxiosPokeAPI from '@/services/api'
 import { BerryProps } from '@/types/globalTypes'
 import { BerriesProps, berryFlavor, BerryFlavorProps } from '@/types/pages/berries'
-import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
@@ -19,7 +18,7 @@ const Berries: React.FC<ComponentProps> = ({ berries }) => {
   const [currentBerries, setCurrentBerries] = useState(berries)
   const searchBarRef = useRef<HTMLInputElement>(null)
 
-  function filterBerries(): void {
+  const filterBerries = (): void => {
     const searchTerm = searchBarRef.current ? searchBarRef.current.value : ''
 
     const filteredBerries = berries.filter(berry => berry.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -33,16 +32,14 @@ const Berries: React.FC<ComponentProps> = ({ berries }) => {
         <title>Berries</title>
       </Head>
 
-      <Navbar />
-
       <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
-        <Box marginBottom="50px">
-          <Heading size="lg" fontFamily="Pokemon Solid">Berries</Heading>
+        <Box marginBottom="2%">
+          <Text fontSize={['lg', '2xl', '4xl']} fontFamily="Josefin Sans" height="100%">Berries</Text>
         </Box>
 
         <CustomSearchBar ref={searchBarRef} onChange={filterBerries} />
 
-        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%" marginTop="50px">
+        <SimpleGrid columns={[2, 4, 6]} spacing="30px" width="100%">
           {currentBerries.map(berry => (
             <BerryModal data={berry} key={berry.id} />
           ))}
@@ -57,7 +54,7 @@ export default Berries
 export const getStaticProps: GetStaticProps = async () => {
   const berries: BerryProps[] = []
 
-  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=20') // limit 70
+  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=5') // limit 70
 
   const arrayOfBerries: BerriesProps[] = berriesData.results
 

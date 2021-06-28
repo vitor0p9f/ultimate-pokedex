@@ -11,17 +11,24 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
+            rel="shortcut icon"
+            href="/img/icons/PokePoint.svg"
+          />
+
+          <link
             rel="preload"
             href="/fonts/PokemonSolidNormal-xyWR.ttf"
             as="font"
             crossOrigin=""
           />
+
           <link
             rel="preload"
             href="/fonts/PokemonHollowNormal-pyPZ.ttf"
             as="font"
             crossOrigin=""
           />
+
           <link
             rel="preload"
             href="/fonts/JosefinSansRegular-x3LYV.ttf"
@@ -29,8 +36,10 @@ class MyDocument extends Document {
             crossOrigin=""
           />
         </Head>
+
         <body>
           <Main />
+
           <NextScript />
         </body>
       </Html>

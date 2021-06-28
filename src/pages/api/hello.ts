@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default (req: NextApiRequest, res: NextApiResponse): void => {
-  res.status(200).json({ name: 'John Doe' })
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<any> => {
+  res.status(200).json('moves')
 }

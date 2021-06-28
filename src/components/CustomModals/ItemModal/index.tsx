@@ -1,38 +1,77 @@
 import ImageCard from '@/components/ImageCard'
 import { ItemProps } from '@/types/globalTypes'
-import { Image, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { ChevronRightIcon } from '@chakra-ui/icons'
+import { Divider, Flex, List, ListIcon, ListItem, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import Image from 'next/image'
+import { memo } from 'react'
 import ModalSchema from '../ModalSchema'
 
 interface ComponentProps {
   data: ItemProps
 }
 
-const ItemModal: React.FC<ComponentProps> = ({ data }) => {
+const ItemModalComponent: React.FC<ComponentProps> = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <ImageCard data={data} onOpen={onOpen} animation={true} />
+      <ImageCard data={data} onOpen={onOpen} animation={true} cursorPointer={true} />
 
       <ModalSchema isOpen={isOpen} onClose={onClose} headerText={data.name}>
-        <Image src={data.sprite} alt={data.name} width="80%" height="80%" margin="0" alignSelf="center" />
+        <Flex direction="column" alignItems="center" width="100%">
+          <Image src={data.sprite} alt={data.name} width="100%" height="100%" />
 
-        <Stack>
-          <Text>Name: {data.name}</Text>
+          <Stack width="80%" marginTop="5%">
+            <Flex flexDir="row" alignItems="center" justifyContent="space-between" width="100%">
+              <Text>Name:</Text>
 
-          <Text>Category: {data.category}</Text>
+              <Text>{data.name}</Text>
+            </Flex>
 
-          <Text>Effects:</Text>
+            <Divider variant="dashed" />
 
-          <Stack direction="column" spacing={4}>
-            {data.effects.map(effect => (
-              <Text key="">{effect}</Text>
-            ))}
+            <Flex flexDir="row" alignItems="center" justifyContent="space-between" width="100%">
+              <Text>Category:</Text>
+
+              <Text>{data.category}</Text>
+            </Flex>
+
+            <Divider variant="dashed" />
+
+            <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
+              <Text>Effects:</Text>
+
+              <List spacing={3} marginTop="10px">
+                {data.effects.map(effect => (
+                  <ListItem key={effect}>
+                    <ListIcon as={ChevronRightIcon} color="green.500" />
+                    {effect}
+                  </ListItem>
+                ))}
+              </List>
+            </Flex>
+
+            <Divider variant="dashed" />
+
+            <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
+              <Text>Attributes:</Text>
+
+              <List spacing={3} marginTop="10px">
+                {data.attributes.map(attribute => (
+                  <ListItem key={attribute}>
+                    <ListIcon as={ChevronRightIcon} color="green.500" />
+                    {attribute}
+                  </ListItem>
+                ))}
+              </List>
+            </Flex>
           </Stack>
-        </Stack>
+        </Flex>
       </ModalSchema>
     </>
   )
 }
+
+const ItemModal = memo(ItemModalComponent)
 
 export default ItemModal

@@ -1,12 +1,11 @@
 import NatureModal from '@/components/CustomModals/NatureModal'
-import Navbar from '@/components/Navbar'
+import Capitalize from '@/globalFunctions/Capitalize'
 import { NatureProps } from '@/types/globalTypes'
 import { NatureSchema, NatureStatusChange, NatureStatusSchema } from '@/types/pages/natures'
-import { SimpleGrid } from '@chakra-ui/react'
+import { Box, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Capitalize from '@/globalFunctions/Capitalize'
 import AxiosPokeAPI from '../../services/api'
 
 interface ComponentProps {
@@ -20,13 +19,21 @@ const Natures: React.FC<ComponentProps> = ({ natures }) => {
         <title>Natures</title>
       </Head>
 
-      <Navbar />
+      <Flex flexDir="column" alignItems="center" paddingRight="5%" paddingLeft="5%" width="100%">
+        <Box>
+          <Text fontSize={['lg', '2xl', '4xl']} fontFamily="Josefin Sans" height="100%">
+            Natures
+          </Text>
+        </Box>
 
-      <SimpleGrid columns={[2, 4, 6]} spacing="20px" paddingRight="5%" paddingLeft="5%" width="100%">
-        {natures.map(nature => (
-          <NatureModal key={nature.id} data={nature} />
-        ))}
-      </SimpleGrid>
+        <SimpleGrid columns={[2, 4, 6]} spacing="30px" paddingRight="5%" paddingLeft="5%" width="100%" marginTop="2%">
+          {natures.map(nature => (
+            <Center key="">
+              <NatureModal key={nature.id} data={nature} />
+            </Center>
+          ))}
+        </SimpleGrid>
+      </Flex>
     </>
   )
 }
@@ -36,7 +43,7 @@ export default Natures
 export const getStaticProps: GetStaticProps = async () => {
   const natures: NatureProps[] = []
 
-  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=1') // limit 30
+  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=5') // limit 30
 
   const naturesArray: NatureSchema[] = naturesData.results
 
@@ -45,10 +52,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
     const natureName = Capitalize(natureData.name)
     const natureID = natureData.id
-    const natureDecreasedStat = natureData.decreased_stat !== null ? natureData.decreased_stat.name : 'none'
-    const natureIncreasedStat = natureData.increased_stat !== null ? natureData.increased_stat.name : 'none'
-    const natureHatesFlavor = natureData.hates_flavor !== null ? Capitalize(natureData.hates_flavor.name) : 'none'
-    const natureLikesFlavor = natureData.likes_flavor !== null ? Capitalize(natureData.likes_flavor.name) : 'none'
+    const natureDecreasedStat = natureData.decreased_stat !== null ? Capitalize(natureData.decreased_stat.name) : 'None'
+
+    const natureIncreasedStat = natureData.increased_stat !== null ? Capitalize(natureData.increased_stat.name) : 'None'
+
+    const natureHatesFlavor = natureData.hates_flavor !== null ? Capitalize(natureData.hates_flavor.name) : 'None'
+
+    const natureLikesFlavor = natureData.likes_flavor !== null ? Capitalize(natureData.likes_flavor.name) : 'None'
+
     const natureStatusChangeArray: NatureStatusChange[] = natureData.pokeathlon_stat_changes
     const natureStatusChange: NatureStatusSchema[] = []
 

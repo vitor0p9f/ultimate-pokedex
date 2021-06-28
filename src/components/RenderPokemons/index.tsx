@@ -1,7 +1,7 @@
 import PokemonModal from '@/components/CustomModals/PokemonModal'
 import RadioCard from '@/components/RadioCard'
 import { PokemonProps } from '@/types/globalTypes'
-import { Box, Button, Center, Flex, SimpleGrid, useRadioGroup } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Heading, SimpleGrid, Text, useRadioGroup } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 import getTypesColor from 'src/globalFunctions/GetColorByType'
@@ -40,8 +40,16 @@ const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
 
   return (
     <>
-      <Flex paddingLeft="5%" paddingRight="5%" alignContent="center" flexDir="column" width="100%">
-        <Box {...radioGroup} width="100%" marginBottom="30px" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+      <Flex paddingLeft="5%" paddingRight="5%" alignItems="center" flexDir="column" width="100%">
+        <Box marginBottom="50px">
+          <Heading size="lg" fontFamily="Josefin Sans">
+            Pokemons
+          </Heading>
+        </Box>
+
+        <Text>Filter by types</Text>
+
+        <Box {...radioGroup} width="100%" marginTop="30px" marginBottom="30px" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           filterPokemons(event.target.value)
         }}>
           <SimpleGrid columns={[3, 6, 9]} spacing="20px" width="100%">
@@ -60,11 +68,9 @@ const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
           </SimpleGrid>
         </Box>
 
-        <Center marginBottom="30px">
-          <Button onClick={() => filterPokemons('')}>Clear Filter</Button>
-        </Center>
+        <Button onClick={() => setCurrentPokemons(pokemons)}marginBottom="30px">Clear Filter</Button>
 
-        <SimpleGrid columns={[2, 4, 6]} spacing="20px" width="100%">
+        <SimpleGrid columns={[2, 4, 6]} spacing="30px" width="100%" marginBottom="30px">
           {currentPokemons.map(pokemon => (
             <PokemonModal key={pokemon.id} data={pokemon} />
           ))}
