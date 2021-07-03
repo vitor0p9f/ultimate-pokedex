@@ -54,7 +54,7 @@ export default Berries
 export const getStaticProps: GetStaticProps = async () => {
   const berries: BerryProps[] = []
 
-  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=5') // limit 70
+  const { data: berriesData } = await AxiosPokeAPI.get('/berry/?limit=70') // limit 70
 
   const arrayOfBerries: BerriesProps[] = berriesData.results
 

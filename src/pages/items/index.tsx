@@ -55,7 +55,7 @@ export default Items
 
 export const getStaticProps: GetStaticProps = async () => {
   const items: ItemProps[] = []
-  const { data: itemsData } = await AxiosPokeAPI.get('/item/?limit=5') // limit 1000
+  const { data: itemsData } = await AxiosPokeAPI.get('/item/?limit=1000') // limit 1000
 
   const itemsArray: ItemSchema[] = itemsData.results
 

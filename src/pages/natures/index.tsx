@@ -43,7 +43,7 @@ export default Natures
 export const getStaticProps: GetStaticProps = async () => {
   const natures: NatureProps[] = []
 
-  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=5') // limit 30
+  const { data: naturesData } = await AxiosPokeAPI.get('/nature?limit=30') // limit 30
 
   const naturesArray: NatureSchema[] = naturesData.results
 
