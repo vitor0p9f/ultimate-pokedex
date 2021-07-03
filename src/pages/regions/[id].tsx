@@ -1,5 +1,6 @@
 import RenderPokemons from '@/components/RenderPokemons'
-import { AbilityProps, LocationProps, PokemonEntries, PokemonProps, PokemonTypes, RegionPokedex, RegionProps, StatsProps, StatsSchema } from '@/types/pages/regions/ID'
+import { PokemonProps } from '@/types/globalTypes'
+import { AbilityEffectEntry, AbilityProps, AbilitySchema, AreasNamesSchema, ArrayRegionsSchema, EncountersAreasSchema, LocationProps, PokemonEntries, PokemonTypes, RegionPokedex, RegionProps, StatsProps, StatsSchema } from '@/types/pages/regions/ID'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
@@ -31,19 +32,19 @@ const Region: React.FC<ComponentProps> = ({ region }) => {
 export default Region
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const regionsID: string[] = ['1']
+  const regionsID: string[] = []
 
-  // const { data: regionsData } = await AxiosPokeAPI.get('/region')
+  const { data: regionsData } = await AxiosPokeAPI.get('/region')
 
-  // const regionsArray: ArrayRegionsSchema[] = regionsData.results
+  const regionsArray: ArrayRegionsSchema[] = regionsData.results
 
-  // for (const region of regionsArray) {
-  //   const { data: regionData } = await axios.get(region.url)
+  for (const region of regionsArray) {
+    const { data: regionData } = await axios.get(region.url)
 
-  //   const itemID = String(regionData.id)
+    const itemID = String(regionData.id)
 
-  //   regionsID.push(itemID)
-  // }
+    regionsID.push(itemID)
+  }
 
   const paths = regionsID.map(regionID => ({
     params: { id: regionID }
@@ -121,44 +122,44 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 
     // Pokémon Abilities
-    // const pokemonAbilitiesArray: AbilitySchema[] = pokemonData.abilities
+    const pokemonAbilitiesArray: AbilitySchema[] = pokemonData.abilities
 
-    // for (const ability of pokemonAbilitiesArray) {
-    //   const { data: abilityData } = await axios.get(ability.ability.url)
+    for (const ability of pokemonAbilitiesArray) {
+      const { data: abilityData } = await axios.get(ability.ability.url)
 
-    //   // Ability effects
-    //   const abilityEffectsArray: AbilityEffectEntry[] = abilityData.effect_entries
+      // Ability effects
+      const abilityEffectsArray: AbilityEffectEntry[] = abilityData.effect_entries
 
-    //   for (const effect of abilityEffectsArray) {
-    //     if (effect.language.name === 'en') {
-    //       pokemonAbilities.push({
-    //         name: Capitalize(ability.ability.name),
-    //         description: effect.short_effect
-    //       })
-    //     }
-    //   }
-    // }
+      for (const effect of abilityEffectsArray) {
+        if (effect.language.name === 'en') {
+          pokemonAbilities.push({
+            name: Capitalize(ability.ability.name),
+            description: effect.short_effect
+          })
+        }
+      }
+    }
 
     // Get pokemon encounters locations
-    // const { data: pokemonEncountersData } = await AxiosPokeAPI.get(`pokemon/${pokemonID}/encounters`)
+    const { data: pokemonEncountersData } = await AxiosPokeAPI.get(`pokemon/${pokemonID}/encounters`)
 
-    // const areasArray: EncountersAreasSchema[] = pokemonEncountersData
+    const areasArray: EncountersAreasSchema[] = pokemonEncountersData
 
-    // for (const area of areasArray) {
-    //   const { data: areaData } = await axios.get(area.location_area.url)
+    for (const area of areasArray) {
+      const { data: areaData } = await axios.get(area.location_area.url)
 
-    //   const areaNames: AreasNamesSchema[] = areaData.names
+      const areaNames: AreasNamesSchema[] = areaData.names
 
-    //   for (const areaName of areaNames) {
-    //     if (areaName.language.name === 'en') {
-    //       if (areaName.name === "") {
-    //         pokemonEncountersAreas.push(Capitalize(area.location_area.name))
-    //       } else {
-    //         pokemonEncountersAreas.push(areaName.name)
-    //       }
-    //     }
-    //   }
-    // }
+      for (const areaName of areaNames) {
+        if (areaName.language.name === 'en') {
+          if (areaName.name === '') {
+            pokemonEncountersAreas.push(Capitalize(area.location_area.name))
+          } else {
+            pokemonEncountersAreas.push(areaName.name)
+          }
+        }
+      }
+    }
 
     regionPokemons.push({
       id: pokemonID,
@@ -168,7 +169,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       abilities: pokemonAbilities,
       baseExperience: pokemonBaseExperience,
       weight: pokemonWeight,
-      encountersAreas: pokemonEncountersAreas
+      encountersAreas: pokemonEncountersAreas,
+      stats: pokemonStats
     })
   }
 

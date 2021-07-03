@@ -1,3 +1,5 @@
+import { PokemonProps } from '@/types/globalTypes'
+
 export type StatsProps = {
   name: string
   baseValue: number
@@ -70,17 +72,6 @@ export type PokemonTypes = {
     name: string
     url: string
   }
-}
-
-export type PokemonProps = {
-  id: number
-  name: string
-  sprite: string
-  types: string[]
-  weight: number
-  abilities: AbilityProps[]
-  baseExperience: number,
-  encountersAreas: string[]
 }
 
 export type RegionProps = {

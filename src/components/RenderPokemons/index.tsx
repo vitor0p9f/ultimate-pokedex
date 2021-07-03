@@ -68,7 +68,7 @@ const RenderPokemons: React.FC<ComponentProps> = ({ pokemons }) => {
           </SimpleGrid>
         </Box>
 
-        <Button onClick={() => setCurrentPokemons(pokemons)}marginBottom="30px">Clear Filter</Button>
+        <Button onClick={() => setCurrentPokemons(pokemons)} marginBottom="30px">Clear Filter</Button>
 
         <SimpleGrid columns={[2, 4, 6]} spacing="30px" width="100%" marginBottom="30px">
           {currentPokemons.map(pokemon => (

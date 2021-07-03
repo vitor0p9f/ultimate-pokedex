@@ -1,6 +1,7 @@
 import { BerryFlavorProps } from './components/CustomModals/BerryModal'
 import { AbilityProps } from './components/CustomModals/PokemonModal'
 import { NatureStatusSchema } from './pages/natures'
+import { StatsProps } from './pages/regions/ID'
 
 export type BerryProps = {
   id: number
@@ -39,5 +40,6 @@ export type PokemonProps = {
   weight: number
   abilities: AbilityProps[]
   baseExperience: number,
-  encountersAreas: string[]
+  encountersAreas: string[],
+  stats: StatsProps[]
 }

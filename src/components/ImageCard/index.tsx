@@ -33,7 +33,7 @@ const ImageCard: React.FC<ComponentProps> = ({ data, onOpen, animation, cursorPo
       {data.types && (
         <Flex justify={data.types.length > 1 ? 'space-between' : 'center'} width="90%" marginBottom="2%">
           {data.types.map(type => (
-            <Badge key={type} width={data.types && data.types.length > 1 ? '45%' : '80%'} variant="subtle" bgColor={getTypesColor(type)} fontSize={['sm', 'sm', 'xs']}>
+            <Badge key={type} width={data.types && data.types.length > 1 ? '45%' : '80%'} variant="subtle" bgColor={getTypesColor(type)} fontSize={['sm', 'sm', 'xs']} textAlign="center">
               {type}
             </Badge>
           ))}

@@ -13,7 +13,7 @@ const Home: React.FC = () => {
       <Flex direction="column" width="100%" justifyContent="center" alignItems="center">
         <Heading display="flex" direction="row" fontFamily="Josefin Sans">
           <Text marginRight="2%">Ultimate</Text>
-          <Image src={Logo} alt="Logo" width="40%" height="40%" />
+          <Image src={Logo} alt="Logo" width="60%" height="60%" />
           <Text marginLeft="2%">Pokédex</Text>
         </Heading>
 
