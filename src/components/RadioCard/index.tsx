@@ -27,7 +27,7 @@ const RadioCard: React.FC<ComponentProps> = ({ radioProps, children, bgColor, va
         bgColor={bgColor}
         _focus={{
           borderWidth: '5px',
-          borderColor: 'yellow'
+          borderColor: '#2a0b00'
         }}
         margin="0"
       >
