@@ -1,3 +1,3 @@
 # Ultimate-Pokedex
 
-This project was developed in order to improve my knowledge about front-end development. For its creation, we used the concepts of generating static pages, or SGG as it is called within the Next.js ecosystem.
+This project was developed with the aim of improving my knowledge of front-end development. For its creation, we used the concept of Incremental Static Regeneration, or ISG as it is called in the Next.js ecosystem.
